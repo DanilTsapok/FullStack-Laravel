@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\ProductManager;
 
 class HomeManager extends Controller
 {
-    function backHome(){
+
+    public function __invoke(Request $request)
+    {
         $products = app(ProductManager::class)->getAllProducts();
         return view('home', compact('products'));
     }
