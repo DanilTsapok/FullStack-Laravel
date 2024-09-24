@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -18,6 +19,12 @@ class AuthManager extends Controller
     function register(){
         return view("authRegister");
     }
+
+    function AllUsers(){
+        return User::all();
+    }
+
+
 
     function loginPost(Request $request){
         $request-> validate([
@@ -40,6 +47,7 @@ class AuthManager extends Controller
         ]);
 
         $data=[
+            'id'=> Str::uuid(),
             'name'=>$request->name,
             'email'=>$request->email,
             'password'=>bcrypt($request->password),
@@ -56,34 +64,40 @@ class AuthManager extends Controller
     }
 
     function deleteUser(string $id){
-        $deletedUser = DB::table('users')-> where('id', $id)->delete();
-        if ($deletedUser){
-            return redirect()->back()->with('Success', 'User deleted successful');
-        } else {
-            return redirect()->back()->with('error','Failed to delete user');
+        if(auth()->user()->role == 'Admin'){
+
+            $deletedUser = DB::table('users')-> where('id', $id)->delete();
+            if ($deletedUser){
+                return redirect()->back()->with('Success', 'User deleted successful');
+            } else {
+                return redirect()->back()->with('error','Failed to delete user');
+            }
         }
+        return redirect()->back()->with('error', 'Access denied. Admins only');
     }
 
     function updateUser(Request $request, $id){
-        $request -> validate([
-            'name'=>'required',
-            'email'=>'required|email|unique:users, email'. $id,
-            'password'=> 'nullable|min:6'
-        ]);
+        if(auth()->user()->role == 'Admin'){
+            $request -> validate([
+                'name'=>'required',
+                'email'=>'required|email|unique:users, email'. $id,
+                'password'=> 'nullable|min:6'
+            ]);
 
-        $data =[
-            'name'=> $request->name,
-            'email'=> $request->email
-        ];
-        if($request->password){
-            $data['password']->bcrypt($request->password);
+            $data =[
+                'name'=> $request->name,
+                'email'=> $request->email
+            ];
+            if($request->password){
+                $data['password']->bcrypt($request->password);
+            }
+            $updateUser = DB::table('users')->where('id', $id)->update($data);
+            if($updateUser){
+                return redirect()->back()->with('success', 'User updated successfuly');
+            }
+            return redirect()-> back()->with('error', "Failed to update user");
         }
-        $updateUser = DB::table('users')->where('id', $id)->update($data);
-        if($updateUser){
-            return redirect()->back()->with('success', 'User updated successfuly');
-        }
-        return redirect()-> back()->with('error', "Failed to update user");
-
+        return redirect()->back()->with('error', 'Access denied. Admins only');
     }
     function logout(){
         Session::flush();
