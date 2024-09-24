@@ -28,8 +28,8 @@
     <div class="products">
         @foreach ($products as $item)
            
+                @dump($item)
                 <div class="productCard">
-                
                     @auth 
                     <a href="/product/{{$item->id}}">
                 link

@@ -3,13 +3,13 @@
 namespace App\Models;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
-// use Illuminate\Database\Eloquent\Concerns\HashUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
     use HasFactory;
 
+    protected $keyType = 'string';
     protected $fillable =[
         'name',
         'image',
@@ -20,7 +20,7 @@ class Product extends Model
 
     protected static function booted(){
         static::creating(function($product){
-            $product->id=(string)Str::uuid();
+            $product->id = (string) Str::uuid();
         });
     }
 }
