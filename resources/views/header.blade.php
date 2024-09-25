@@ -14,7 +14,7 @@
             <a href="/profile" style="color: orange">{{ auth()->user()->name }}</a>
         </div>
         <a href="/cart">
-            <img src="https://img.icons8.com/parakeet-line/48/FAB005/shopping-cart.png" alt="Shopping Cart"/>
+            <img style="width: 25px" src="https://img.icons8.com/parakeet-line/48/FAB005/shopping-cart.png" alt="Shopping Cart"/>
         </a>
         <a href="{{ route('logout') }}">
             <img width="25" height="25" src="https://img.icons8.com/ios/50/FAB005/exit--v1.png" alt="Exit"/>

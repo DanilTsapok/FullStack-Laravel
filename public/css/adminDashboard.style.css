@@ -10,31 +10,62 @@ thead {
     height: 80px;
     background-color: orange;
 }
-
+.btn {
+    width: 200px;
+    height: 50px;
+    background-color: white;
+    color: orange;
+    border-radius: 10px;
+    text-decoration: none;
+}
+.btn:hover {
+    cursor: pointer;
+    background-color: orange;
+    color: white;
+    transition: 0.3s ease-in-out;
+}
 td {
     border-bottom: 2px solid orange;
     padding: 10px;
-    vertical-align: top;
+    gap: 20px;
+    /* vertical-align: middle; */
 }
 .main {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 100px;
+    flex-direction: column;
+    padding: 100px 0px;
+    gap: 10px;
 }
-.Notification {
+img {
+    width: 100%;
+}
+.notification {
     height: 150px;
     background-color: white;
     position: absolute;
     top: 120px;
     right: 10px;
     opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 20px;
     visibility: hidden;
     transition: opacity 0.5s ease, visibility 0.5s ease;
 }
-.Notification.show {
+.notification.show {
     opacity: 1;
     visibility: visible;
+}
+td .action {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .actionBtn {

@@ -11,57 +11,72 @@
 
 <body>
     @if(session('Success') || session('error'))
-        <div class="Notification" id="notification">
-            @if(session('Success'))
+        <div class="notification" id="notification">
+            @if(session('Success')) 
+            <div>
+                <img width="64" height="64" src="https://img.icons8.com/cute-clipart/64/ok.png" alt="ok"/>
+            </div>
+            <div>
                 {{session('Success')}}
+            </div>
             @else
-                {{session('error')}}
+            <div>
+                <img width="64" height="64" src="https://img.icons8.com/cute-clipart/64/error.png" alt="error"/>
+            </div>
+               <div>  
+                   {{session('error')}}
+            </div> 
             @endif
         </div>
     @endif
     @include('header')
     <div class="main">
-        <table>
-            <thead>
-                <tr>
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($products as $item)
+        <a  class="btn"href="/dashboard/product/create">
+        Add New Product 
+        </a>
+        @if($products->isEmpty())
+            <div style="background: white; d"><h1 style="color: orange">EMPTY</h1></div>
+        @else
+            <table>
+                <thead>
                     <tr>
-                        <td>
-                            <img class="image" src="{{ $item->image }}" alt="{{ $item->name }}" style="width: 150px; height: auto;">
-                        </td>
-                        <td>{{ $item->name }}</td>
-                        <td style="word-wrap: break-word;max-width: 200px" >{{ $item->description }}</td>
-                        <td>{{ $item->price }} грн</td>
-                        <td class="action">
-                            @if (Auth::user()->role === 'admin')
-                                <form action="{{ route('deleteProduct.delete', $item->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('PUT')
-                                    <button class="actionBtn edit" type="submit">
-                                        Edit
-                                    </button>
-                                </form>
-                                <form action="{{ route('deleteProduct.delete', $item->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="actionBtn delete" type="submit">
-                                        Delete
-                                    </button>
-                                </form>
-                            @endif
-                        </td>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Action</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach ($products as $item)
+                        <tr>
+                            <td>
+                                <img class="image" src="{{ $item->image }}" alt="{{ $item->name }}" style="width: 150px; height: auto;">
+                            </td>
+                            <td>{{ $item->name }}</td>
+                            <td style="word-wrap: break-word;max-width: 200px" >{{ $item->description }}</td>
+                            <td>{{ $item->price }} грн</td>
+                            <td class="action">
+                                @if (Auth::user()->role === 'admin')
+                                <div>
+                                    <a href="/dashboard/product/{{$item->id}}/edit" class="actionBtn edit" type="submit">
+                                        Edit
+                                    </a>
+                                </div>
+                                    <form action="{{ route('deleteProduct.delete', $item->id) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="actionBtn delete" type="submit">
+                                            Delete
+                                        </button>
+                                    </form>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @endif
     </div>
 
     <script>
@@ -71,7 +86,7 @@
                 notification.classList.add('show');
                 setTimeout(() => {
                     notification.classList.remove('show');
-                }, 5000); 
+                }, 3000); 
             }
         });
     </script>

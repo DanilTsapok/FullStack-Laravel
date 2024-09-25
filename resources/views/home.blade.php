@@ -14,12 +14,6 @@
         @include('main')
     </main>
     <footer>
-        {{-- @if(session('Success'))
-    <div>{{ session('Success') }}</div>
-@endif
-@if(session('error'))
-    <div>{{ session('error') }}</div>
-@endif --}}
         @2024TsapokDanil
     </footer>
 </body>

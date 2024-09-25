@@ -29,6 +29,15 @@ Route::get('/', HomeManager::class)->name('home');
 Route::get('/cart', [CartManager::class, 'cartView'])->name('cart')->middleware(CheckAdmin::class);
 
 Route::get('/product/{id}',[ProductManager:: class, 'getProductById'])->name('getProduct.get');
+
+Route::get('/dashboard/product/{id}/edit', [ProductManager:: class, 'updateProductView']);
+
+Route::put('/dashboard/product/{id}/edit', [ProductManager:: class, 'updateProduct'])->name('updateProduct.put');
+
 Route::delete('/product/{id}', [ProductManager:: class, 'deleteProduct'])->name('deleteProduct.delete');
 
 Route::get('/dashboard', [AdminManager::class,'getAdminDashboard'])->name('adminDashboard.get');
+Route::post('/dashboard/product/create', [ProductManager::class,'createProduct'])->name('createProduct.post');
+Route::get('/dashboard/product/create', function(){
+    return view('createProduct');
+});

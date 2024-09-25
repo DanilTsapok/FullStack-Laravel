@@ -10,7 +10,13 @@ use App\Http\Controllers\Controller;
 
 class ProductManager extends Controller
 {
+   
     function getAllProducts (){
+        $products = DB::table('products')->get();
+        return $products;
+    }
+
+    function getAllProductsEloquent (){
         $products = Product::all();
         return $products;
     }
@@ -25,7 +31,7 @@ class ProductManager extends Controller
             'name'=> 'required|string',
             'image'=> 'required|string',
             'description'=> 'required|string',
-            'price'=> 'required|decimal',
+            'price'=> 'required',
             'stock'=>'required|integer',
         ]);
 
@@ -41,9 +47,9 @@ class ProductManager extends Controller
         $product = DB::table('products')->insert($data);
 
         if($product){
-            return redirect()->back()->with('success','Product created successfully');
+            return redirect(route('adminDashboard.get'))->with('success','Product created successfully');
         }
-        return redirect()->back()->with('error','Product creation failed, try again');
+        return redirect(route('adminDashboard.get'))->with('error','Product creation failed, try again');
     }
 
     function createProductEloquent(Request $request){
@@ -55,7 +61,9 @@ class ProductManager extends Controller
             'stock'=>'required|integer',
         ]);
         $data = [
+            'id'=> Str::uuid(),
             'name'=> $request->name,
+            'image'=> 'required|string',
             'description'=> $request->description,
             'price'=> $request->price,
             'stock'=> $request->stock
@@ -67,28 +75,34 @@ class ProductManager extends Controller
         return redirect()->back()->with('error','Product creation failed, try again');
     }
 
+    function updateProductView($id){
+
+        $product = Product::find($id);
+        return view('editFormProduct', ['product'=>$product]);
+    }
+
     function updateProduct(Request $request, $id){
+   
         $request->validate([
             'name'=> 'required|string',
             'image'=>'required|string',
             'description'=> 'required|string',
-            'price'=> 'required|decimal',
+            'price'=> 'required',
             'stock'=>'required|integer',
         ]);
+
         $data =[
             'name'=> $request->name,
             'image'=> $request->image,
             'description'=> $request->description,
             'price'=> $request->price,
             'stock'=> $request->stock
-
         ];
         $updateProduct= DB::table('products')->where('id', $id)->update($data);
-
         if($updateProduct){
-            return redirect()->back()->with('success', 'Product updated successfuly');
+            return redirect(route('adminDashboard.get'))->with('success', 'Product updated successfuly');
         }
-        return redirect()->back()->with('error', 'Failed to update product');
+        return redirect(route('adminDashboard.get'))->with('error', 'Failed to update product');
     }
     
     function updateProductEloquent(Request $request, $id){
@@ -96,10 +110,11 @@ class ProductManager extends Controller
             'name'=> 'required|string',
             'image'=>'required|string',
             'description'=> 'required|string',
-            'price'=> 'required|decimal',
+            'price'=> 'required',
             'stock'=>'required|integer',
         ]);
         
+
         $data =[
             'name'=> $request->name,
             'image'=> $request->image,
@@ -108,8 +123,9 @@ class ProductManager extends Controller
             'stock'=> $request->stock
 
         ];
-        $updateProduct= Product::findOrFail($id)->update($data);
-
+       
+      
+         $updateProduct= Product::find($id)->update($data);
         if($updateProduct){
             return redirect()->back()->with('success', 'Product updated successfuly');
         }

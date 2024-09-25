@@ -3,25 +3,6 @@
     @foreach ($products as $item)
             {{-- @dump($item) --}}
             <div class="productCard">
-                @auth 
-                <a href="/product/{{$item->id}}">
-            link
-        </a>
-                    {{-- @if (Auth::user()->role === 'admin')
-                        <form action="{{ route('deleteProduct.delete', $item->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('PUT')
-                            <button type="submit">Edit</button>
-                        </form>
-                        <form action="{{ route('deleteProduct.delete', $item->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Delete</button>
-                        </form>
-                    @endif --}}
-            
-                
-            @endauth
                 <div class="image">
                     <img class="image" src="{{ $item->image }}" alt="{{ $item->name }}">
                 </div>
