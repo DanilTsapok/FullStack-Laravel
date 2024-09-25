@@ -1,0 +1,60 @@
+table {
+    background-color: white;
+    border: none;
+    border-spacing: 0;
+    border-radius: 20px;
+    padding: 20px;
+}
+thead {
+    border-radius: 20px;
+    height: 80px;
+    background-color: orange;
+}
+
+td {
+    border-bottom: 2px solid orange;
+    padding: 10px;
+    vertical-align: top;
+}
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 100px;
+}
+.Notification {
+    height: 150px;
+    background-color: white;
+    position: absolute;
+    top: 120px;
+    right: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+.Notification.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.actionBtn {
+    width: 80px;
+    height: 40px;
+    cursor: pointer;
+}
+.actionBtn:hover {
+    transform: scale(1.05);
+    transition: 0.3s ease-in-out;
+}
+.edit {
+    border: 1px solid orange;
+    border-radius: 5px;
+    background-color: lightyellow;
+    color: black;
+}
+.delete {
+    border: 1px solid red;
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+}

@@ -8,11 +8,15 @@
     font-style: normal;
     transition: 0.3s ease-in-out;
 }
+html {
+    height: 100%;
+    position: relative;
+}
 body {
     display: flex;
     flex-direction: column;
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
     /* background: linear-gradient(19deg, #3eecac 0%, #ee74e1 100%); */
     /* background-size: cover; */
 
@@ -183,8 +187,7 @@ img {
     }
 }
 footer {
-    position: absolute;
-    bottom: 0;
+    margin-top: auto;
     width: 100%;
     background-color: orange;
     height: 80px;

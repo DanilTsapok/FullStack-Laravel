@@ -32,6 +32,7 @@ class ProductManager extends Controller
         $data = [
             'id'=> Str::uuid(),
             'name'=> $request->name,
+            'image'=>$request->image,
             'description'=> $request->description,
             'price'=> $request->price,
             'stock'=> $request->stock
@@ -118,17 +119,17 @@ class ProductManager extends Controller
     function deleteProduct($id){
         $deleteProduct = DB::table('products')->where('id', $id)->delete();
         if($deleteProduct){
-            return redirect('/')->with('Success','Product deleted successfuly');
+            return redirect(route('adminDashboard.get'))->with('Success','Product deleted successfuly');
         }else{
-            return redirect()->back()->with('error','Failed to delete product');
+            return redirect(route('adminDashboard.get'))->with('error','Failed to delete product');
         }    
     }
     function deleteProductEloquent($id){
         $deleteProduct = Product::find($id)->delete();
         if($deleteProduct){
-            return redirect('/')->back()->with('Success','Product deleted successfuly');
+            return redirect(route('adminDashboard.get'))->with('Success','Product deleted successfuly');
         }else{
-            return redirect()->back()->with('error','Failed to delete product');
+            return redirect(route('adminDashboard.get'))->with('error','Failed to delete product');
         }    
     }
 }

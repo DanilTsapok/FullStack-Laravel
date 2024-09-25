@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Middleware\CheckAdmin;
 use App\Http\Controllers\AuthManager;
 use App\Http\Controllers\CartManager;
 use App\Http\Controllers\HomeManager;
-use App\Http\Middleware\CheckAdmin;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminManager;
 use App\Http\Controllers\ProductManager;
 use App\Http\Controllers\ProfileManager;
 Route::resource('products', ProductManager::class);
@@ -28,5 +29,6 @@ Route::get('/', HomeManager::class)->name('home');
 Route::get('/cart', [CartManager::class, 'cartView'])->name('cart')->middleware(CheckAdmin::class);
 
 Route::get('/product/{id}',[ProductManager:: class, 'getProductById'])->name('getProduct.get');
-Route::delete('/product/{id}', [ProductManager:: class, 'deleteProductEloquent'])->name('deleteProduct.delete');
+Route::delete('/product/{id}', [ProductManager:: class, 'deleteProduct'])->name('deleteProduct.delete');
 
+Route::get('/dashboard', [AdminManager::class,'getAdminDashboard'])->name('adminDashboard.get');
