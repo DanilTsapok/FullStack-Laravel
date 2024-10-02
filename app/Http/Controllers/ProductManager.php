@@ -81,27 +81,28 @@ class ProductManager extends Controller
         return view('editFormProduct', ['product'=>$product]);
     }
 
-    function updateProduct(Request $request, $id){
-   
+    function updateProduct(Request $request, $id)
+    {
+     
         $request->validate([
-            'name'=> 'required|string',
-            'image'=>'required|string',
-            'description'=> 'required|string',
-            'price'=> 'required',
-            'stock'=>'required|integer',
+            'name' => 'nullable|string',
+            'image' => 'nullable|string',
+            'description' => 'nullable|string',
+            'price' => 'nullable|numeric',
+            'stock' => 'nullable|integer',
         ]);
-
-        $data =[
-            'name'=> $request->name,
-            'image'=> $request->image,
-            'description'=> $request->description,
-            'price'=> $request->price,
-            'stock'=> $request->stock
-        ];
-        $updateProduct= DB::table('products')->where('id', $id)->update($data);
-        if($updateProduct){
-            return redirect(route('adminDashboard.get'))->with('success', 'Product updated successfuly');
+    
+        $data = $request->only(['name', 'image', 'description', 'price', 'stock']);
+    
+        $data = array_filter($data, function ($value) {
+            return !is_null($value);
+        });
+        $updateProduct = DB::table('products')->where('id', $id)->update($data);
+    
+        if ($updateProduct) {
+            return redirect(route('adminDashboard.get'))->with('success', 'Product updated successfully');
         }
+    
         return redirect(route('adminDashboard.get'))->with('error', 'Failed to update product');
     }
     

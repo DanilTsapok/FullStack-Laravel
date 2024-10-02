@@ -6,8 +6,8 @@
         <a class="homeroute" href="{{route('home')}}">PizzaPage</a>
     </h1>
     @if (Route::currentRouteName()=='adminDashboard.get')
-    <h2>Admin Dashboard</h2>
-@endif
+        <h2>Admin Dashboard</h2>
+    @endif
     <div class="nav-link">
         <div style="display: flex; gap: 10px;">
             <img width="20" height="20" src="https://img.icons8.com/color/48/gender-neutral-user.png" alt="User Icon"/>
@@ -20,8 +20,6 @@
             <img width="25" height="25" src="https://img.icons8.com/ios/50/FAB005/exit--v1.png" alt="Exit"/>
         </a>
         {{-- <h2>Admin Dashboard</h2> --}}
- 
-
         @if (Auth::user()->role === 'admin' && Route::currentRouteName()=='home')
             <a href="/dashboard">Admin</a>
         @endif

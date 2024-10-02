@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Edit Product</title>
-    <link rel="stylesheet" href="{{ asset('css/adminDashboard.style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/editPage.style.css') }}">
 </head>
 <body>
-    <h1>Edit Product: {{$product->name}}</h1>
     <form action="{{ route('updateProduct.put', $product->id) }}" method="POST" >
+        <h1>Edit Product: {{$product->name}}</h1>
         @csrf
         @method('PUT')
         <div>
