@@ -34,7 +34,7 @@ class ProductManager extends Controller
             'price'=> 'required',
             'stock'=>'required|integer',
         ]);
-
+          
         $data = [
             'id'=> Str::uuid(),
             'name'=> $request->name,
@@ -141,7 +141,7 @@ class ProductManager extends Controller
         }    
     }
     function deleteProductEloquent($id){
-        $deleteProduct = Product::find($id)->delete();
+        $deleteProduct = Product::findOrFail($id)->delete();
         if($deleteProduct){
             return redirect(route('adminDashboard.get'))->with('Success','Product deleted successfuly');
         }else{

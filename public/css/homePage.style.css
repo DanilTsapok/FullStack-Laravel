@@ -17,12 +17,13 @@ body {
     flex-direction: column;
     width: 100%;
     height: 100%;
+
     /* background: linear-gradient(19deg, #3eecac 0%, #ee74e1 100%); */
     /* background-size: cover; */
 
     background-image: url("https://i.pinimg.com/564x/6b/4e/94/6b4e94adb75b05e9ae7b7876e4c7790d.jpg");
 }
-img {
+.imgItem {
     width: 60%;
 }
 header {
@@ -211,4 +212,24 @@ h3 {
 .btnLogout {
     width: 25px;
     height: 25px;
+}
+.notification {
+    height: 150px;
+    background-color: white;
+    position: absolute;
+    top: 120px;
+    right: 10px;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 20px;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+.notification.show {
+    opacity: 1;
+    visibility: visible;
 }

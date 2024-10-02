@@ -26,7 +26,7 @@
         </div>
         <div>
             <label for="image">Product Image</label>
-            <input type="text" id="image" name="image">
+            <input type="file" id="image" name="image">
         </div>
         <div>
             <label for="image">Stock</label>

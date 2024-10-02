@@ -4,7 +4,7 @@
             {{-- @dump($item) --}}
             <div class="productCard">
                 <div class="image">
-                    <img class="image" src="{{ $item->image }}" alt="{{ $item->name }}">
+                    <img class="imgItem" src="{{ $item->image }}" alt="{{ $item->name }}">
                 </div>
                 <div><h3>{{ $item->name }}</h3></div>
                 <div>{{ $item->description }}</div>
