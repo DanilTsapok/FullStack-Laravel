@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="{{ asset('css/adminDashboard.style.css') }}">
    
 </head>
-
 <body>
     @if(session('Success') || session('error'))
         <div class="notification" id="notification">
@@ -31,9 +30,11 @@
     @endif
     @include('header')
     <div class="main">
+       @if(Auth::user()->role === 'admin') 
         <a  class="btn"href="/dashboard/product/create">
         Add New Product 
         </a>
+        @endif
         @if($products->isEmpty())
             <div style="background: white; d"><h1 style="color: orange">EMPTY</h1></div>
         @else
@@ -57,7 +58,7 @@
                             <td style="word-wrap: break-word;max-width: 200px" >{{ $item->description }}</td>
                             <td>{{ $item->price }} грн</td>
                             <td class="action">
-                                @if (Auth::user()->role === 'admin')
+                                @if (Auth::user()->role === 'admin' ||Auth::user()->role === 'editor'  )
                                 <div>
                                     <a href="/dashboard/product/{{$item->id}}/edit" class="actionBtn edit" type="submit">
                                         Edit

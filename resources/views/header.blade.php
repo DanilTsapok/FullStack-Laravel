@@ -5,8 +5,11 @@
         <img style="width: 30px" src="https://img.icons8.com/?size=80&id=65012&format=png" alt="PizzaPage Logo">
         <a class="homeroute" href="{{route('home')}}">PizzaPage</a>
     </h1>
-    @if (Route::currentRouteName()=='adminDashboard.get')
+    @if (Route::currentRouteName()=='adminDashboard.get' && Auth::user()->role === 'admin')
         <h2>Admin Dashboard</h2>
+    @endif
+    @if(Route::currentRouteName()=='adminDashboard.get' && Auth::user()->role === 'editor')
+        <h2>Edit Dashboard</h2>
     @endif
     <div class="nav-link">
         <div style="display: flex; gap: 10px;">
@@ -19,14 +22,13 @@
         <a href="{{ route('logout') }}">
             <img width="25" height="25" src="https://img.icons8.com/ios/50/FAB005/exit--v1.png" alt="Exit"/>
         </a>
-        {{-- <h2>Admin Dashboard</h2> --}}
-        @if (Auth::user()->role === 'admin' && Route::currentRouteName()=='home')
+        @if (Auth::user()->role === 'admin' || Auth::user()->role === 'editor' && Route::currentRouteName()=='home')
             <a href="/dashboard">Admin</a>
         @endif
     </div>
     @else
-    <h1>
-        <img style="width: 30px" src="https://img.icons8.com/?size=80&id=65012&format=png" alt="PizzaPage Logo">PizzaPage</h1>
-    <a href="{{ route('login') }}" class="btnLogin">Увійти</a>
+        <h1>
+            <img style="width: 30px" src="https://img.icons8.com/?size=80&id=65012&format=png" alt="PizzaPage Logo">PizzaPage</h1>
+        <a href="{{ route('login') }}" class="btnLogin">Увійти</a>
     @endauth 
     </header>

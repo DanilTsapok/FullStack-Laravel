@@ -33,11 +33,9 @@
             <img src="{{ $product->image }}" alt="{{ $product->name }}" style="width: 150px; height: auto;">
         </div>
         <div>
-            <button type="submit">Update Product</button>
+            <button type="submit" class="submit">Update Product</button>
         </div>
+        <a href="/dashboard">Back to Dashboard</a>
     </form>
-
-
-    <a href="/dashboard">Back to Dashboard</a>
 </body>
 </html>

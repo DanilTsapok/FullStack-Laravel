@@ -14,11 +14,14 @@ class CheckAdmin
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, $role): Response
     {
-        if(Auth::check() && Auth::user()->role === 'admin'){
+        $user=Auth::user();
+        $rolesArray = explode('|',$role);
+        if(in_array($user->role, $rolesArray)){
             return $next($request);
         }
+
         return redirect()->route('home')->with('error', 'Access denied. Admins only.');
     }
 }

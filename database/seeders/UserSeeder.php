@@ -16,23 +16,31 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             'id'=> (string) Str::uuid(),
-            'name'=> 'Danil',
-            'email'=>'danya@gmail.com',
+            'name'=> 'admin',
+            'email'=>'admin@gmail.com',
             'role'=> 'admin',
             'password'=>bcrypt(env('ADMIN_PASSWORD')),
             'created_at'=>now(),
             'updated_at'=>now()
         ]);
 
-        // DB::table('users')->insert([
-        //     'id'=> (string) Str::uuid(),
-        //     'name'=> 'DanilTest',
-        //     'email'=>'danyatest@gmail.com',
-        //     'role'=> 'user',
-        //     'password'=>bcrypt(env('ADMIN_PASSWORD')),
-        //     'created_at'=>now(),
-        //     'updated_at'=>now()
-        // ]);
-
+        DB::table('users')->insert([
+            'id'=> (string) Str::uuid(),
+            'name'=> 'user',
+            'email'=>'user@gmail.com',
+            'role'=> 'user',
+            'password'=>bcrypt(env('ADMIN_PASSWORD')),
+            'created_at'=>now(),
+            'updated_at'=>now()
+        ]);
+        DB::table('users')->insert([
+            'id'=> (string) Str::uuid(),
+            'name'=> 'editor',
+            'email'=>'editor@gmail.com',
+            'role'=> 'editor',
+            'password'=>bcrypt(env('ADMIN_PASSWORD')),
+            'created_at'=>now(),
+            'updated_at'=>now()
+        ]);
     }
 }
