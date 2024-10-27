@@ -29,12 +29,12 @@
     </div>
 @endif
         @include('header')
-    <main>
+    {{-- <main>
         @include('main')
-    </main>
-    <footer>
+    </main> --}}
+    {{-- <footer>
         @2024TsapokDanil
-    </footer>
+    </footer> --}}
 </body>
 <script>
      document.addEventListener('DOMContentLoaded', function() {

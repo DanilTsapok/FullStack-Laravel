@@ -11,20 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
-            $table->uuid('id')->primary();;
+        Schema::create('posts', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->uuid('creator_id');
             $table->string('name');
             $table->string('image');
             $table->text('description');
-            $table->decimal('price',8,2);
-            $table->integer('stock')->default(0);
             $table->timestamps();
-        });
+        
+            $table->foreing('creator_id')
+                    ->references('id')
+                    ->on('users')
+                    ->onDelete('cascade');
+        });   
     }
-
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('products');
