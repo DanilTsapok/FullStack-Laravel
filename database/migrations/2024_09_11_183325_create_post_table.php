@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('image');
             $table->text('description');
+            $table->integer('likes');
             $table->timestamps();
-        
-            $table->foreing('creator_id')
+            $table->foreign('creator_id')
                     ->references('id')
                     ->on('users')
                     ->onDelete('cascade');

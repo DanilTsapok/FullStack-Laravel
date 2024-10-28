@@ -6,9 +6,9 @@ use App\Http\Controllers\CartManager;
 use App\Http\Controllers\HomeManager;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminManager;
-use App\Http\Controllers\ProductManager;
+use App\Http\Controllers\PostsManager;
 use App\Http\Controllers\ProfileManager;
-Route::resource('products', ProductManager::class);
+Route::resource('posts', PostsManager::class);
 //Auth
 Route::get('/login',[AuthManager::class, 'login'])->name('login');
 Route::get('/registration',[AuthManager::class, 'register'])->name('register');
@@ -28,16 +28,16 @@ Route::get('/', HomeManager::class)->name('home');
 
 Route::get('/cart', [CartManager::class, 'cartView'])->name('cart');
 
-Route::get('/product/{id}',[ProductManager:: class, 'getProductById'])->name('getProduct.get');
+Route::get('/product/{id}',[PostsManager:: class, 'getProductById'])->name('getProduct.get');
 
-Route::get('/dashboard/product/{id}/edit', [ProductManager:: class, 'updateProductView']);
+Route::get('/dashboard/product/{id}/edit', [PostsManager:: class, 'updateProductView']);
 
-Route::put('/dashboard/product/{id}/edit', [ProductManager:: class, 'updateProduct'])->name('updateProduct.put');
+Route::put('/dashboard/product/{id}/edit', [PostsManager:: class, 'updateProduct'])->name('updateProduct.put');
 
-Route::delete('/product/{id}', [ProductManager:: class, 'deleteProduct'])->name('deleteProduct.delete');
+Route::delete('/product/{id}', [PostsManager:: class, 'deleteProduct'])->name('deleteProduct.delete');
 
 Route::get('/dashboard', [AdminManager::class,'getAdminDashboard'])->name('adminDashboard.get')->middleware("role:admin|editor");
-Route::post('/dashboard/product/create', [ProductManager::class,'createProduct'])->name('createProduct.post');
+Route::post('/dashboard/product/create', [PostsManager::class,'createProduct'])->name('createProduct.post');
 Route::get('/dashboard/product/create', function(){
     return view('createProduct');
 });

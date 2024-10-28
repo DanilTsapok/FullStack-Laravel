@@ -11,7 +11,7 @@ class HomeManager extends Controller
 
     public function __invoke(Request $request)
     {
-        $products = app(ProductManager::class)->getAllProducts();
-        return view('home', compact('products'));
+        $posts = app(PostsManager::class)->getAllPosts();
+        return view('home',compact('posts'));
     }
 }

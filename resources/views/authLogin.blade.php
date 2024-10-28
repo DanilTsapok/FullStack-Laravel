@@ -13,7 +13,7 @@
       </div> 
       <form class="form" action="{{route('login.post')}}" method="POST">
         @csrf  
-        <img width="64" height="64" src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-login-web-store-flaticons-lineal-color-flat-icons-3.png" alt="external-login-web-store-flaticons-lineal-color-flat-icons-3"/>
+        {{-- <img width="64" height="64" src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-login-web-store-flaticons-lineal-color-flat-icons-3.png" alt="external-login-web-store-flaticons-lineal-color-flat-icons-3"/> --}}
             <h1>Log in</h1>
             <p class="form-title">Sign in to your account</p>
             <div class="input-container">

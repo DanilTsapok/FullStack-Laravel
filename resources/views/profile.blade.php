@@ -6,15 +6,18 @@
     <title>Profile</title>
     <link rel="stylesheet" href="{{ asset('css/profilePage.style.css') }}">
 </head>
-<body>
-    <div style="display:flex; justify-content:center; flex-direction:column; align-items:center">
-        <main class="userData">
-            <h1>Profile</h1>
-            <img width="40" height="40" src="https://img.icons8.com/color/48/gender-neutral-user.png" alt="gender-neutral-user"/>
-            <p>Name:{{auth()->user()->name}}</p>
+<body class="profileBackground">
+    @include('header')
+        <div class="titleProfilePage">
+            <h4>Профіль</h4>
+        </div>
+        <div class="profileContainer">
+            <div class="profileBody">
+                   <img width="40" height="40" src="https://img.icons8.com/color/48/gender-neutral-user.png" alt="gender-neutral-user"/>
+            <p>{{auth()->user()->name}}</p>
             <p>Email:{{auth()->user()->email}}</p>
-         <a href="/" class="submit">Back</a>
-       </main>
-    </div>
+            </div>
+        </div>
+ 
 </body>
 </html>    

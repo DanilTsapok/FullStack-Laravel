@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\Product;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
-class ProductManager extends Controller
+class PostsManager extends Controller
 {
    
-    function getAllProducts (){
-        $products = DB::table('products')->get();
-        return $products;
+    function getAllPosts (){
+        $posts = Post::all();
+        return $posts;
     }
+        
+    
 
     function getAllProductsEloquent (){
         $products = Product::all();
