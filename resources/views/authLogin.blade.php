@@ -7,6 +7,25 @@
     <link rel="stylesheet" href="{{ asset('css/LoginForm.style.css') }}">
 </head>
 <body>
+  @if(session('Success') || session('error'))
+  <div class="notification" id="notification">
+      @if(session('Success')) 
+      <div>
+          <img width="64" height="64" src="https://img.icons8.com/cute-clipart/64/ok.png" alt="ok"/>
+      </div>
+      <div>
+          {{session('Success')}}
+      </div>
+      @else
+      <div>
+          <img width="64" height="64" src="https://img.icons8.com/cute-clipart/64/error.png" alt="error"/>
+      </div>
+         <div>  
+             {{session('error')}}
+      </div> 
+    @endif
+  </div>
+  @endif
     <div class="formContainer">
       <div>
         <img src="{{asset('img/Group 184.svg')}}" class="imageLoops" alt="">

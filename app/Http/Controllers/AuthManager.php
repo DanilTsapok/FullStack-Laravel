@@ -24,8 +24,6 @@ class AuthManager extends Controller
         return User::all();
     }
 
-
-
     function loginPost(Request $request){
         $request-> validate([
             'email'=> 'required',
@@ -33,7 +31,8 @@ class AuthManager extends Controller
         ]);
         $credentials = $request->only('email', 'password');
         if(Auth::attempt($credentials)){
-            return redirect()-> intended(route('home'));
+            
+            return redirect()->intended(route('home'))->with('success',"Success login");
         } else {
             return redirect(route('login'))->with('error', 'Login details are not valid');
         }
@@ -54,8 +53,6 @@ class AuthManager extends Controller
             'created_at'=> now(),
             'updated_at'=> now()
         ];
-        
-        // $user = User::create($data);
         $user = DB::table('users')->insert($data);
         if(!$user){
             return redirect(route('register'))->with('error','Registration failed, try again');

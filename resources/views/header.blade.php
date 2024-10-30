@@ -16,7 +16,7 @@
                 <img width="25" height="25" src="https://img.icons8.com/fluency-systems-regular/48/565656/home--v1.png" alt="home--v1"/>
             </a>
             @endif
-            <button>
+            <button id="openModalSecond">
                 <img width="25" height="25" src="https://img.icons8.com/fluency-systems-filled/50/565656/plus-math.png" alt="plus-math"/>
             </button>
         @auth

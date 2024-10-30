@@ -15,7 +15,6 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('creator_id');
             $table->string('name');
-            $table->string('image');
             $table->text('description');
             $table->integer('likes');
             $table->timestamps();

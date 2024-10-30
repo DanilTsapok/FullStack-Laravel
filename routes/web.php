@@ -15,7 +15,6 @@ Route::get('/registration',[AuthManager::class, 'register'])->name('register');
 Route::post('/login',[AuthManager::class, 'loginPost'])->name('login.post');
 Route::post('/registration',[AuthManager::class, 'registerPost'])->name('register.post');
 Route::get('/logout',[AuthManager::class,'logout'])->name('logout');
-// Cart
 
 
 // Profile
@@ -26,8 +25,6 @@ Route::get('/', HomeManager::class)->name('home');
 
 // Product
 
-Route::get('/cart', [CartManager::class, 'cartView'])->name('cart');
-
 Route::get('/product/{id}',[PostsManager:: class, 'getProductById'])->name('getProduct.get');
 
 Route::get('/dashboard/product/{id}/edit', [PostsManager:: class, 'updateProductView']);
@@ -37,7 +34,7 @@ Route::put('/dashboard/product/{id}/edit', [PostsManager:: class, 'updateProduct
 Route::delete('/product/{id}', [PostsManager:: class, 'deleteProduct'])->name('deleteProduct.delete');
 
 Route::get('/dashboard', [AdminManager::class,'getAdminDashboard'])->name('adminDashboard.get')->middleware("role:admin|editor");
-Route::post('/dashboard/product/create', [PostsManager::class,'createProduct'])->name('createProduct.post');
+Route::post('/dashboard/product/create', [PostsManager::class,'createPost'])->name('createPost.post')->middleware("role:user");
 Route::get('/dashboard/product/create', function(){
     return view('createProduct');
 });

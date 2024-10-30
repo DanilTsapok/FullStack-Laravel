@@ -32,9 +32,6 @@
     <main>
         @include('main')
     </main>
-    {{-- <footer>
-        @2024TsapokDanil
-    </footer> --}}
 </body>
 <script>
      document.addEventListener('DOMContentLoaded', function() {
@@ -42,7 +39,7 @@
             if (notification) {
                 notification.classList.add('show');
                 setTimeout(() => {
-                    notification.classList.remove('show');
+                    // notification.classList.remove('show');
                 }, 3000); 
             }
         });

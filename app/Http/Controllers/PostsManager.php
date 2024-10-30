@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class PostsManager extends Controller
 {
@@ -17,66 +18,36 @@ class PostsManager extends Controller
         return $posts;
     }
         
-    
-
-    function getAllProductsEloquent (){
-        $products = Product::all();
-        return $products;
+    function getPostById(string $id){
+        $post = Post::find($id);
+        return $post;
     }
 
-    function getProductById(string $id){
-        $product = Product::find($id);
-        return $product;
-    }
-
-    function createProduct(Request $request){
+    function createPost(Request $request){
         $request->validate([
             'name'=> 'required|string',
             'image'=> 'required|string',
             'description'=> 'required|string',
-            'price'=> 'required',
-            'stock'=>'required|integer',
         ]);
           
         $data = [
             'id'=> Str::uuid(),
             'name'=> $request->name,
-            'image'=>$request->image,
             'description'=> $request->description,
-            'price'=> $request->price,
-            'stock'=> $request->stock
+            'creator_id'=>Auth::user()->id,
+            'likes'=>0,
+            'created_at'=>now(),
         ];
 
-        $product = DB::table('products')->insert($data);
+        $post = DB::table('posts')->insert($data);
 
-        if($product){
-            return redirect(route('adminDashboard.get'))->with('success','Product created successfully');
+        if($post){
+            return redirect(route('home'))->with('success','Post created successfully');
         }
-        return redirect(route('adminDashboard.get'))->with('error','Product creation failed, try again');
+        return redirect(route('home'))->with('error','Post creation failed, try again');
     }
 
-    function createProductEloquent(Request $request){
-        $request->validate([
-            'name'=> 'required|string',
-            'image'=> 'required|string',
-            'description'=> 'required|string',
-            'price'=> 'required|decimal',
-            'stock'=>'required|integer',
-        ]);
-        $data = [
-            'id'=> Str::uuid(),
-            'name'=> $request->name,
-            'image'=> 'required|string',
-            'description'=> $request->description,
-            'price'=> $request->price,
-            'stock'=> $request->stock
-        ];
-        $product = Product::create($data);
-        if($product){
-            return redirect()->back()->with('success','Product created successfully');
-        }
-        return redirect()->back()->with('error','Product creation failed, try again');
-    }
+
 
     function updateProductView($id){
 
@@ -109,33 +80,6 @@ class PostsManager extends Controller
         return redirect(route('adminDashboard.get'))->with('error', 'Failed to update product');
     }
     
-    function updateProductEloquent(Request $request, $id){
-        $request->validate([
-            'name'=> 'required|string',
-            'image'=>'required|string',
-            'description'=> 'required|string',
-            'price'=> 'required',
-            'stock'=>'required|integer',
-        ]);
-        
-
-        $data =[
-            'name'=> $request->name,
-            'image'=> $request->image,
-            'description'=> $request->description,
-            'price'=> $request->price,
-            'stock'=> $request->stock
-
-        ];
-       
-      
-         $updateProduct= Product::find($id)->update($data);
-        if($updateProduct){
-            return redirect()->back()->with('success', 'Product updated successfuly');
-        }
-        return redirect()->back()->with('error', 'Failed to update product');
-    }
-
     function deleteProduct($id){
         $deleteProduct = DB::table('products')->where('id', $id)->delete();
         if($deleteProduct){
@@ -144,12 +88,5 @@ class PostsManager extends Controller
             return redirect(route('adminDashboard.get'))->with('error','Failed to delete product');
         }    
     }
-    function deleteProductEloquent($id){
-        $deleteProduct = Product::findOrFail($id)->delete();
-        if($deleteProduct){
-            return redirect(route('adminDashboard.get'))->with('Success','Product deleted successfuly');
-        }else{
-            return redirect(route('adminDashboard.get'))->with('error','Failed to delete product');
-        }    
-    }
+
 }

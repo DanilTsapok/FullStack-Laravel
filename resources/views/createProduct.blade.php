@@ -48,6 +48,7 @@
             <label for="image">Stock</label>
             <input type="text" id="stock" name="stock">
         </div>
+        
         <div>
             <button type="submit" class="submit">Create Product</button>
         </div>
