@@ -16,6 +16,12 @@
                    <img width="40" height="40" src="https://img.icons8.com/color/48/gender-neutral-user.png" alt="gender-neutral-user"/>
             <p>{{auth()->user()->name}}</p>
             <p>Email:{{auth()->user()->email}}</p>
+                @foreach ($posts as $post )
+                <div>{{$post->name}}</div>
+                @endforeach
+
+
+
             </div>
         </div>
  

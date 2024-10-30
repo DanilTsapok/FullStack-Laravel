@@ -1,5 +1,4 @@
 <link rel='stylesheet' href="{{asset('css/main.style.css')}}">
-
 <section class="firstSection">
     @auth
     <div class="titleProfilePage">
@@ -17,19 +16,19 @@
         <a href="{{route('login')}}">Login</a>
     </div>
     @endauth
-
     <div class="postsContainer">
         <div class="postsBody">
-            @dd( Auth::user()->id);
+            {{-- @dd( Auth::user()->id); --}}
             @foreach ($posts as $post)
                 <div class="postBody">
                     <h4>{{$post->name}} <span>{{$post->created_at->diffForHumans()}}</span></h4>
                     <h4>{{$post->description}}</h4>
-                    <p><img width="26" height="26" src="https://img.icons8.com/metro/26/4a4a4a/like.png" alt="like"/>{{$post->likes}}</p>
+                    <h4>{{$post->creator->name}}</h4>
+                  
+                    <p onclick="{{route('addLike')}}"><img width="26" height="26" src="https://img.icons8.com/metro/26/4a4a4a/like.png" alt="like"/>{{$post->likes}}</p>
                 </div>
             @endforeach
         </div>
     </div>
 </section>
-
 @include('modalAddPost')

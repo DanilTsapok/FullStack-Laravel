@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminManager;
 use App\Http\Controllers\PostsManager;
 use App\Http\Controllers\ProfileManager;
 Route::resource('posts', PostsManager::class);
+Route::resource('posts', ProfileManager::class );
 //Auth
 Route::get('/login',[AuthManager::class, 'login'])->name('login');
 Route::get('/registration',[AuthManager::class, 'register'])->name('register');
@@ -34,7 +35,8 @@ Route::put('/dashboard/product/{id}/edit', [PostsManager:: class, 'updateProduct
 Route::delete('/product/{id}', [PostsManager:: class, 'deleteProduct'])->name('deleteProduct.delete');
 
 Route::get('/dashboard', [AdminManager::class,'getAdminDashboard'])->name('adminDashboard.get')->middleware("role:admin|editor");
-Route::post('/dashboard/product/create', [PostsManager::class,'createPost'])->name('createPost.post')->middleware("role:user");
+Route::post('/dashboard/product/create', [PostsManager::class,'createPost'])->name('createPost.post')->middleware("role:user|admin");
 Route::get('/dashboard/product/create', function(){
     return view('createProduct');
 });
+Route::post('/addLike',[PostsManager::class,'addLike'])->name('addLike');

@@ -14,10 +14,21 @@ class PostsManager extends Controller
 {
    
     function getAllPosts (){
-        $posts = Post::all();
+        $posts = Post::with('creator')->get();
         return $posts;
     }
         
+    function getPostsAuthUser(string $UserId){
+        $allPosts = Post::all()->where('creator_id', $UserId);
+        return $allPosts;
+    }
+    
+    function getAutorPost(string $PostId){
+        $post = getPostById($PostId);
+        $autor = User::find($post->creator_id);
+        return $autor;
+    }
+
     function getPostById(string $id){
         $post = Post::find($id);
         return $post;
@@ -26,7 +37,6 @@ class PostsManager extends Controller
     function createPost(Request $request){
         $request->validate([
             'name'=> 'required|string',
-            'image'=> 'required|string',
             'description'=> 'required|string',
         ]);
           
@@ -47,7 +57,12 @@ class PostsManager extends Controller
         return redirect(route('home'))->with('error','Post creation failed, try again');
     }
 
-
+    function addLike(string $id){
+        $post= Post::find($id);
+        if($post){
+            $post->increment('like');
+        }
+    }
 
     function updateProductView($id){
 

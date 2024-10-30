@@ -19,6 +19,10 @@ class Post extends Model
   
     ];
 
+    public function creator(){
+        return $this->belongsTo(User::class, 'creator_id');
+    }
+
     protected static function booted(){
         static::creating(function($post){
             $post->id = (string) Str::uuid();

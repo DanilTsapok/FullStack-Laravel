@@ -12,10 +12,6 @@
                 <input type="text" id="name" name="name" placeholder="Product Name">
             </div>
             <div>
-                <input type="file" id="image" name="image" >
-            </div>
-
-            <div>
                 <textarea id="description" name="description"placeholder="Product Description" ></textarea>
             </div>
             <div>
