@@ -14,19 +14,15 @@ class PostsManager extends Controller
 {
    
     function getAllPosts (){
-        $posts = Post::with('creator')->get();
+        $posts = Post::with('creator')->orderBy('created_at', 'desc')->get();
         return $posts;
     }
         
-    function getPostsAuthUser(string $UserId){
-        $allPosts = Post::all()->where('creator_id', $UserId);
+    function getPostsAuthUser(string $id){
+        $allPosts = Post::where('creator_id', $id)
+                        ->orderBy('created_at', 'desc') // сортировка по времени в порядке убывания
+                        ->get();
         return $allPosts;
-    }
-    
-    function getAutorPost(string $PostId){
-        $post = getPostById($PostId);
-        $autor = User::find($post->creator_id);
-        return $autor;
     }
 
     function getPostById(string $id){
@@ -60,8 +56,9 @@ class PostsManager extends Controller
     function addLike(string $id){
         $post= Post::find($id);
         if($post){
-            $post->increment('like');
+            $post->increment('likes');
         }
+        return back();
     }
 
     function updateProductView($id){

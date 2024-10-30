@@ -18,14 +18,15 @@
     @endauth
     <div class="postsContainer">
         <div class="postsBody">
-            {{-- @dd( Auth::user()->id); --}}
             @foreach ($posts as $post)
                 <div class="postBody">
                     <h4>{{$post->name}} <span>{{$post->created_at->diffForHumans()}}</span></h4>
                     <h4>{{$post->description}}</h4>
                     <h4>{{$post->creator->name}}</h4>
-                  
-                    <p onclick="{{route('addLike')}}"><img width="26" height="26" src="https://img.icons8.com/metro/26/4a4a4a/like.png" alt="like"/>{{$post->likes}}</p>
+                  <form action="{{route('posts.addLike', $post->id)}}" method="POST">
+                    @csrf
+                    <button type="submit"><img width="26" height="26" src="https://img.icons8.com/metro/26/4a4a4a/like.png" alt="like"/>{{$post->likes}}</button>
+                </form>
                 </div>
             @endforeach
         </div>

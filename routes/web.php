@@ -39,4 +39,4 @@ Route::post('/dashboard/product/create', [PostsManager::class,'createPost'])->na
 Route::get('/dashboard/product/create', function(){
     return view('createProduct');
 });
-Route::post('/addLike',[PostsManager::class,'addLike'])->name('addLike');
+Route::post('/posts/{id}/addLike',[PostsManager::class,'addLike'])->name('posts.addLike');

@@ -17,11 +17,8 @@
             <p>{{auth()->user()->name}}</p>
             <p>Email:{{auth()->user()->email}}</p>
                 @foreach ($posts as $post )
-                <div>{{$post->name}}</div>
+                    <div>{{$post->name}}</div>
                 @endforeach
-
-
-
             </div>
         </div>
  
