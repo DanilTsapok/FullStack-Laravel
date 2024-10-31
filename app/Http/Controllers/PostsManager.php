@@ -20,7 +20,7 @@ class PostsManager extends Controller
         
     function getPostsAuthUser(string $id){
         $allPosts = Post::where('creator_id', $id)
-                        ->orderBy('created_at', 'desc') // сортировка по времени в порядке убывания
+                        ->orderBy('created_at', 'desc')
                         ->get();
         return $allPosts;
     }
@@ -53,11 +53,16 @@ class PostsManager extends Controller
         return redirect(route('home'))->with('error','Post creation failed, try again');
     }
 
-    function addLike(string $id){
-        $post= Post::find($id);
-        if($post){
+    function addLike(string $id)
+    {
+        $user = Auth::user();
+        $post = Post::find($id);
+    
+        if ($post && !$post->likes()->where('user_id', $user->id)->exists()) {
             $post->increment('likes');
+            $post->likes()->attach($user->id);
         }
+    
         return back();
     }
 

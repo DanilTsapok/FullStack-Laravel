@@ -13,7 +13,6 @@ class Post extends Model
     
     protected $fillable =[
         'name',
-        'image',
         'description',
         'likes',
   
@@ -22,7 +21,10 @@ class Post extends Model
     public function creator(){
         return $this->belongsTo(User::class, 'creator_id');
     }
-
+    public function likes()
+    {
+        return $this->belongsToMany(User::class, 'post_user_likes', 'post_id', 'user_id');
+    }
     protected static function booted(){
         static::creating(function($post){
             $post->id = (string) Str::uuid();

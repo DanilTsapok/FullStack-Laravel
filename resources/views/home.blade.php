@@ -39,7 +39,7 @@
             if (notification) {
                 notification.classList.add('show');
                 setTimeout(() => {
-                    // notification.classList.remove('show');
+                    notification.classList.remove('show');
                 }, 3000); 
             }
         });

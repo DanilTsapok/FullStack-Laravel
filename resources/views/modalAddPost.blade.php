@@ -31,11 +31,9 @@
     let span = document.getElementsByClassName("close")[0];
     
     secondBtn.onclick = function(){
-        modal.style.display = "block";
-    }
-    btn ? btn.onclick = function() {
         modal.style.display = "flex";
-    }: null
+    }
+
     span.onclick = function() {
         modal.style.display = "none";
     }
