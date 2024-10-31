@@ -4,10 +4,7 @@
     <div class="titleProfilePage">
         <h4>Головна</h4>
     </div>
-    <div></div>
-    <div class="AddPostBtn">
-        <a href="#" id="openModalSecond"><img width="25" height="25" src="https://img.icons8.com/fluency-systems-filled/50/FFFFFF/plus-math.png" alt="plus-math"/></a>
-    </div>
+   @include('AddPostBtn')
     @else
     <div class="titleProfilePage">
         <h4>Головна</h4>
@@ -17,6 +14,7 @@
     </div>
     @endauth
     <div class="postsContainer">
+        
         <div class="postsBody">
             @foreach ($posts as $post)
                 <div class="postBody">
@@ -27,7 +25,7 @@
                         <h4>{{$post->creator->name}} <span>{{$post->created_at->diffForHumans()}}</span></h4>
                         <h4>{{$post->name}} </h4>
                         <h4>{{$post->description}}</h4>
-                        
+                 
                       <form action="{{route('posts.addLike', $post->id)}}" method="POST">
                         @csrf
                         <button type="submit" id='likeBtn'><img width="26" height="26" src="https://img.icons8.com/metro/26/FFFFFf/like.png" alt="like"/>{{$post->likes}}</button>

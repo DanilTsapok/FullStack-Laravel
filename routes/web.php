@@ -32,7 +32,7 @@ Route::get('/dashboard/product/{id}/edit', [PostsManager:: class, 'updateProduct
 
 Route::put('/dashboard/product/{id}/edit', [PostsManager:: class, 'updateProduct'])->name('updateProduct.put');
 
-Route::delete('/product/{id}', [PostsManager:: class, 'deleteProduct'])->name('deleteProduct.delete');
+Route::delete('/post/{id}/delete', [PostsManager:: class, 'deletePost'])->name('deletePost.delete');
 
 Route::get('/dashboard', [AdminManager::class,'getAdminDashboard'])->name('adminDashboard.get')->middleware("role:admin|editor");
 Route::post('/dashboard/product/create', [PostsManager::class,'createPost'])->name('createPost.post')->middleware("role:user|admin");

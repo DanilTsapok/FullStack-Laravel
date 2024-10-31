@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 class PostsManager extends Controller
 {
@@ -48,7 +49,11 @@ class PostsManager extends Controller
         $post = DB::table('posts')->insert($data);
 
         if($post){
-            return redirect(route('home'))->with('success','Post created successfully');
+            
+            if(Route::currentRouteName() == "home"){
+                return redirect(route('home'))->with('success','Post created successfully');
+            }
+            return redirect(route('profileView'));
         }
         return redirect(route('home'))->with('error','Post creation failed, try again');
     }
@@ -97,12 +102,13 @@ class PostsManager extends Controller
         return redirect(route('adminDashboard.get'))->with('error', 'Failed to update product');
     }
     
-    function deleteProduct($id){
-        $deleteProduct = DB::table('products')->where('id', $id)->delete();
-        if($deleteProduct){
-            return redirect(route('adminDashboard.get'))->with('Success','Product deleted successfuly');
+    function deletePost(string $id){
+        $deletePost = DB::table('posts')-> where('id', $id)->delete();
+
+        if($deletePost){
+            return redirect(route('profileView'))->with('Success','Post deleted successfully');
         }else{
-            return redirect(route('adminDashboard.get'))->with('error','Failed to delete product');
+            return redirect(route('profileView'))->with('error','Failed to delete product');
         }    
     }
 

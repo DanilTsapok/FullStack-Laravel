@@ -27,6 +27,7 @@
         </div> 
         @endif
     </div>
+   
 @endif
         @include('header')
     <main>
