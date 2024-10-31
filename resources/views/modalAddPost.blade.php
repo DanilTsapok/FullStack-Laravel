@@ -4,20 +4,21 @@
 <div id="modalCreate" class="modal">
     <div class="modal-content">
         <div class="headerModal">
+            <h4>Create post</h4>
             <span class="close">&times;</span>
         </div>
         
-        <form action="{{ route('createPost.post') }}" method="POST">
+        <form action="{{ route('createPost.post') }}" method="POST"class="formCreatePost">
             @csrf
             @method('POST')
-            <div>
+            <div class="input-container">
                 <input type="text" id="name" name="name" placeholder="Title">
             </div>
-            <div>
+            <div class="input-container">
                 <textarea id="description" name="description"placeholder="Description" ></textarea>
             </div>
             <div>
-                <button type="submit" >Publish</button>
+                <button type="submit" style="display:flex;justify-content:center; width:100px;border: 2px solid #FFFFFF" >Publish</button>
             </div>
         </form>
     </div>
